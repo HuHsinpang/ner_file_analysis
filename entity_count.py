@@ -30,9 +30,11 @@ def count(filepath):
                     entity_len = 0
         
         with open('count.txt', 'a', encoding='utf-8') as fout:
-            fout.write(file_name+':\tchar_num:'+str(char_num-sent_num)+'\tsent_num:'+str(sent_num)+'\tentity_num:'+str(sum(entities_num)))
+            entities_sum = sum(entities_num)
+            fout.write(file_name+':\tchar_num:'+str(char_num-sent_num)+'\tsent_num:'+str(sent_num)+'\tentity_num:'+str(entities_sum))
             count_str = ','.join(list(map(str, entities_num)))
-            fout.write('\ndetail:'+count_str+'\n\n')
+            count_rate = ','.join(list(map(str, map(lambda x: round(x/entities_sum,4), entities_num))))
+            fout.write('\ndetail:'+count_str+'\n'+count_rate+'\n\n')
 
 
 if __name__ == "__main__":
